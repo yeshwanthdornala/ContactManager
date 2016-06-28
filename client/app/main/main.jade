@@ -1,10 +1,8 @@
+md-button(ng-click="main.toContact()") New Contact
 
 md-list(ng-cloak)
-  md-list-item.md-3-line(ng-repeat='contact in main.contacts', ng-click='null')
+  md-list-item.md-3-line(ng-repeat='contact in main.contacts', ng-click='main.editContact(contact)')
       img.md-avatar(ng-src='{{contact.imageUrl ? contact.imageUrl : "assets/images/yeoman.png"}}', alt='{{item.who}}')
       .md-list-item-text(layout='column')
         h3 {{ contact.firstName + " " + contact.lastName}}
         h4 {{ contact.mobile }}
-        
-//- md-button.md-primary(ng-click="main.createContact()") New Contact
-  

@@ -5,8 +5,8 @@ import mongoose from 'mongoose';
 var ContactSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
-  phone: String,
-  mobile: String,
+  phone: Number,
+  mobile: Number,
   email: String
 });
 

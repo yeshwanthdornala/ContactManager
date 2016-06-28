@@ -1,6 +1,11 @@
 'use strict';
 
-class NavbarController {}
+class NavbarController {
+    constructor($scope, $state) {
+      this.$scope = $scope;
+      this.$state = $state;
+    }
+}
 
 //end-non-standard
 
