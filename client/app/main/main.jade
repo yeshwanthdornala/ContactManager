@@ -1,0 +1,36 @@
+md-list(ng-controller='ListCtrl', ng-cloak='')
+      md-subheader.md-no-sticky Single Action Checkboxes
+      md-list-item(ng-repeat='topping in toppings')
+        p Yeshwanth
+        md-checkbox.md-secondary(ng-model='topping.wanted')
+      md-divider
+      md-subheader.md-no-sticky Secondary Buttons
+      md-list-item.secondary-button-padding
+        p Clicking the button to the right will fire the secondary action
+        md-button.md-secondary(ng-click='doSecondaryAction($event)') More Info
+      md-list-item.secondary-button-padding(ng-click='doPrimaryAction($event)')
+        p Click anywhere to fire the primary action, or the button to fire the secondary
+        md-button.md-secondary(ng-click='doSecondaryAction($event)') More Info
+      md-divider
+      md-subheader.md-no-sticky Clickable Items with Secondary Controls
+      md-list-item(ng-click='navigateTo(setting.extraScreen, $event)', ng-repeat='setting in settings')
+        md-icon(md-svg-icon='{{setting.icon}}')
+        p  {{ setting.name }} 
+        md-switch.md-secondary(ng-model='setting.enabled')
+      md-list-item(ng-click="navigateTo('data usage', $event)")
+        md-icon(md-svg-icon='cached')
+        p Data Usage
+      md-divider
+      md-subheader.md-no-sticky Checkbox with Secondary Action
+      md-list-item(ng-repeat='message in messages')
+        md-checkbox(ng-model='message.selected')
+        p {{message.title}}
+        md-icon.md-secondary(ng-click='doSecondaryAction($event)', aria-label='Chat', md-svg-icon='communication:message')
+      md-divider
+      md-subheader.md-no-sticky Avatar with Secondary Action Icon
+      md-list-item.noright(ng-repeat='person in people', ng-click='goToPerson(person.name, $event)')
+        img.md-avatar(alt='{{ person.name }}', ng-src='{{ person.img }}')
+        p {{ person.name }}
+        md-checkbox.md-secondary(ng-model='person.selected')
+        md-icon.md-secondary.md-hue-3(md-svg-icon='communication:email', ng-click='doSecondaryAction($event)', aria-label='Send Email')
+        md-icon.md-secondary(ng-click='doSecondaryAction($event)', aria-label='Chat', md-svg-icon='communication:message')
