@@ -5,6 +5,5 @@ angular.module('contactmanagerApp', ['contactmanagerApp.constants', 'ngCookies',
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
-
     $locationProvider.html5Mode(true);
   });
