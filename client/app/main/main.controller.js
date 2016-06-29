@@ -11,7 +11,7 @@
       this.contacts = [];
       this.$mdMedia = $mdMedia;
       this.$mdDialog = $mdDialog;
-      this.$rootScope =$rootScope;
+      this.$rootScope = $rootScope;
 
       this.$http.get('/api/contacts')
         .then(response => {
@@ -26,10 +26,10 @@
       var useFullScreen = (this.$mdMedia('sm') || this.$mdMedia('xs'))  && this.$scope.customFullscreen;
       this.$mdDialog.show({
         controller: 'dialogController',
-        templateUrl: 'app/contact/contactDialog.html',
+        templateUrl: 'app/main/contactDialog.html',
        //  parent: angular.element(document.body),
         clickOutsideToClose:true,
-        fullscreen: true
+        fullscreen: useFullScreen
       })
       .then(function(answer) {
        //  this.$scope.status = 'You said the information was "' + answer + '".';
@@ -39,58 +39,29 @@
 
     }
 
-    $onInit() {
-      this.$http.get('/api/things')
-        .then(response => {
-          this.awesomeThings = response.data;
-        });
-    }
-
-    addThing() {
-      console.log('add things');
-      if (this.newThing) {
-        this.$http.post('/api/things', {
-          name: this.newThing
-        });
-        this.newThing = '';
-      }
-    }
-
-
     toContact() {
+      this.$rootScope.isEdit = false;
       var useFullScreen = (this.$mdMedia('sm') || this.$mdMedia('xs'))  && this.$scope.customFullscreen;
          this.$mdDialog.show({
            controller: 'dialogController',
-           templateUrl: 'app/contact/contactDialog.html',
+           templateUrl: 'app/main/contactDialog.html',
           //  parent: angular.element(document.body),
            clickOutsideToClose:true,
-           fullscreen: true
+           fullscreen: useFullScreen
          })
          .then(function(answer) {
           //  this.$scope.status = 'You said the information was "' + answer + '".';
-         }, function() {
-           console.log($rootScope.isEdit);
-           $rootScope.isEdit = false;
+        }, function() {
+          console.log(this.$rootScope);
+           this.$rootScope.isEdit = false;
           //  this.$scope.status = 'You cancelled the dialog.';
          });
-    }
-
-    deleteThing(thing) {
-      this.$http.delete('/api/things/' + thing._id);
-    }
-
-    getContacts(){
-      this.$http.get('/api/contacts').then(function(res){
-        console.log('contacts', res);
-        contacts = res;
-      });
     }
   }
 
   angular.module('contactmanagerApp')
     .controller('dialogController',['$scope', '$mdDialog', '$http', '$state', '$rootScope', function($scope, $mdDialog, $http, $state, $rootScope){
       $scope.contact = {};
-      console.log($rootScope.isEdit);
 
       if ($rootScope.isEdit) {
         $scope.contact = $rootScope.contact;
@@ -101,7 +72,7 @@
       };
 
       $scope.deleteContact = function(){
-        $http.delete('/api/contacts/' + $scope.contact._id,).then(response => {
+        $http.delete('/api/contacts/' + $scope.contact._id).then(response => {
           $rootScope.isEdit = false;
           $state.reload();
           $scope.cancel();

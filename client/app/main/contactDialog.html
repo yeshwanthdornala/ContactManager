@@ -1,8 +1,8 @@
 <md-dialog ng-cloak>
-  <form>
+  <form name="contactform" novalidate="">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>  Add New Contact</h2>
+        <h2>Add New Contact</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()">
           <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -37,12 +37,11 @@
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" flex="100">
-      <span flex="100"></span>
-      {{ isEdit }}
+      <span flex></span>
       <md-button class="md-raised md-primary" ng-click="deleteContact()">
        Delete
       </md-button>
-      <md-button class="md-raised md-primary" ng-click="saveContact()">
+      <md-button class="md-raised md-primary" ng-click="contactform.$valid ? saveContact(): '' ">
        Save
       </md-button>
       <md-button ng-click="cancel()">
